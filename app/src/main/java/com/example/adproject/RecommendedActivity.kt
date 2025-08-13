@@ -99,11 +99,11 @@ class RecommendedActivity : AppCompatActivity() {
                     r.isSuccessful && r.body()?.get("code")?.asInt == 1
                 } catch (_: Exception) { false }
             }
-            if (!trigOk) return@launch fail("触发推荐失败")
+            if (!trigOk) return@launch fail("Failed to trigger recommendation")
 
             // 2) 轮询拿 ID
             val ids = fetchRecommendIdsWithRetry()
-            if (ids.isEmpty()) return@launch fail("当前没有可用的推荐题目")
+            if (ids.isEmpty()) return@launch fail("No recommended questions available")
 
             // 3) 清空现有并逐个拉详情
             adapter.clear()
@@ -147,7 +147,7 @@ class RecommendedActivity : AppCompatActivity() {
         if (index >= ids.size) {
             showLoading(false)
             isLoading = false
-            Toast.makeText(this, "已获取到 ${adapter.itemCount} 条推荐", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Fetched ${adapter.itemCount} recommendations", Toast.LENGTH_SHORT).show()
             return
         }
         val id = ids[index]

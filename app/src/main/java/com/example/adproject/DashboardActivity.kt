@@ -90,19 +90,19 @@ class DashboardActivity : AppCompatActivity() {
         chartView.xAxis.granularity = 1f
         chartView.axisRight.isEnabled = false
         chartView.axisLeft.axisMinimum = 0f
-        chartView.axisLeft.axisMaximum = 100f // 百分比
+        chartView.axisLeft.axisMaximum = 100f // percentage
     }
 
     private fun updateChartForDays(days: Int) {
         if (accuracyRates.isEmpty()) {
-            Toast.makeText(this, "暂无图表数据", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "No chart data", Toast.LENGTH_SHORT).show()
             chartView.clear()
             return
         }
 
         // 取“最近 N 天”，不足 N 天就展示全部
         val recentRates = accuracyRates.takeLast(days)
-        Log.d("ChartUpdate", "展示最近 $days 天数据: $recentRates")
+        Log.d("ChartUpdate", "Showing last $days days: $recentRates")
 
         val entries = recentRates.mapIndexed { index, value ->
             Entry(index.toFloat(), value * 100f) // 转成百分比
@@ -141,7 +141,7 @@ class DashboardActivity : AppCompatActivity() {
                 try {
                     val resp = api.dashboard()
                     if (!resp.isSuccessful) {
-                        Triple(false, "网络错误: ${resp.code()}", emptyList<Float>())
+                        Triple(false, "Network error: ${resp.code()}", emptyList<Float>())
                     } else {
                         val body = resp.body()
                         // 约定：code==1 成功；data.accuracyRates 为 List<Float/Double/Int> 任意数值
@@ -157,7 +157,7 @@ class DashboardActivity : AppCompatActivity() {
                         Triple(success, message, rates)
                     }
                 } catch (e: Exception) {
-                    Triple(false, e.message ?: "请求失败", emptyList<Float>())
+                    Triple(false, e.message ?: "Request failed", emptyList<Float>())
                 }
             }
 
@@ -168,7 +168,7 @@ class DashboardActivity : AppCompatActivity() {
             } else {
                 accuracyRates = data
                 if (accuracyRates.isEmpty()) {
-                    Toast.makeText(this@DashboardActivity, "暂无图表数据", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@DashboardActivity, "No chart data", Toast.LENGTH_SHORT).show()
                 }
             }
             updateChartForDays(7)

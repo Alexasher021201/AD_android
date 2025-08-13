@@ -34,7 +34,7 @@ class LoginActivity : AppCompatActivity() {
             val pwd   = vb.inputPassword.editText?.text?.toString()?.trim().orEmpty()
 
             if (email.isEmpty() || pwd.isEmpty()) {
-                Toast.makeText(this, "请输入邮箱和密码", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter email and password", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -43,10 +43,10 @@ class LoginActivity : AppCompatActivity() {
             if (result.isSuccess) {
                 val u = result.getOrThrow()
                 UserSession.save(this, userId = u.id, userName = u.name, email = u.email)
-                Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show()
                 goExercise()
             } else {
-                Toast.makeText(this, result.exceptionOrNull()?.message ?: "登录失败", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, result.exceptionOrNull()?.message ?: "Login failed", Toast.LENGTH_SHORT).show()
             }
         }
     }

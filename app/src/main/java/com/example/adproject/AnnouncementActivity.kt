@@ -92,7 +92,7 @@ class AnnouncementActivity : AppCompatActivity() {
                 }
                 applyData(data)
             } catch (e: Exception) {
-                Toast.makeText(this@AnnouncementActivity, "加载失败：${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AnnouncementActivity, "Load failed: ${e.message}", Toast.LENGTH_SHORT).show()
                 applyData(emptyList())
             } finally {
                 swipe.isRefreshing = false
@@ -136,25 +136,25 @@ class AnnouncementActivity : AppCompatActivity() {
         val empty = enriched.isEmpty()
         emptyState.visibility = if (empty) View.VISIBLE else View.GONE
         listView.visibility = if (empty) View.GONE else View.VISIBLE
-        emptyText.text = if (selectedClassId == null) "暂无任何通知" else "当前班级无通知"
+        emptyText.text = if (selectedClassId == null) "No announcements yet" else "No announcements for current class"
     }
 
     /** 弹出筛选对话框 */
     private fun showFilterDialog() {
-        val names = mutableListOf("全部消息") + joinedClasses.map { it.className }
+        val names = mutableListOf("All Messages") + joinedClasses.map { it.className }
         val checked = when (val cid = selectedClassId) {
             null -> 0
             else -> (joinedClasses.indexOfFirst { it.classId == cid }.takeIf { it >= 0 } ?: -1) + 1
         }
 
         AlertDialog.Builder(this)
-            .setTitle("筛选班级")
+            .setTitle("Filter Class")
             .setSingleChoiceItems(names.toTypedArray(), checked) { d, which ->
                 selectedClassId = if (which == 0) null else joinedClasses[which - 1].classId
                 d.dismiss()
                 loadAnnouncements()
             }
-            .setNegativeButton("取消", null)
+            .setNegativeButton("Cancel", null)
             .show()
     }
 

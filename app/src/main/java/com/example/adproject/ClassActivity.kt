@@ -100,7 +100,7 @@ class ClassActivity : AppCompatActivity() {
             val realPos = position - homeworkListView.headerViewsCount
             if (realPos !in 0 until adapter.items.size) return@setOnItemClickListener
             val item = adapter.items[realPos]
-            Toast.makeText(this, "进入班级：${item.className}（id=${item.classId}）", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Entering class: ${item.className} (id=${item.classId})", Toast.LENGTH_SHORT).show()
             // val intent = Intent(this, ClassDetailActivity::class.java)
             // intent.putExtra("classId", item.classId)
             // startActivity(intent)
@@ -120,19 +120,19 @@ class ClassActivity : AppCompatActivity() {
                         val list = body.data?.list ?: emptyList()
                         adapter.replace(list)
                     } else {
-                        Toast.makeText(this@ClassActivity, body?.msg ?: "加载班级失败", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@ClassActivity, body?.msg ?: "Failed to load classes", Toast.LENGTH_SHORT).show()
                         adapter.replace(emptyList())
                     }
                 } else {
-                    Toast.makeText(this@ClassActivity, "网络错误：${resp.code()}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@ClassActivity, "Network error: ${resp.code()}", Toast.LENGTH_SHORT).show()
                     adapter.replace(emptyList())
                 }
             } catch (e: IOException) {
-                Toast.makeText(this@ClassActivity, "连接失败", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ClassActivity, "Connection failed", Toast.LENGTH_SHORT).show()
                 adapter.replace(emptyList())
             } catch (e: Exception) {
                 e.printStackTrace()
-                Toast.makeText(this@ClassActivity, "未知错误：${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@ClassActivity, "Unknown error: ${e.message}", Toast.LENGTH_SHORT).show()
                 adapter.replace(emptyList())
             }
         }
