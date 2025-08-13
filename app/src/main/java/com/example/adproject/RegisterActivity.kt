@@ -24,12 +24,12 @@ class RegisterActivity : AppCompatActivity() {
             val pwd = vb.inputPassword.editText?.text?.toString()?.trim().orEmpty()
 
             if (name.isEmpty() || email.isEmpty() || pwd.isEmpty()) {
-                Toast.makeText(this, "请填写完整信息", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please complete all fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             // 简单邮箱校验（可按需删除/替换）
             if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                Toast.makeText(this, "邮箱格式不正确", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Invalid email format", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -41,12 +41,12 @@ class RegisterActivity : AppCompatActivity() {
             if (result.isSuccess) {
                 val u = result.getOrThrow()
                 UserSession.save(this, userId = u.id, userName = u.name, email = u.email)
-                Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, ExerciseActivity::class.java).apply {
                     flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 })
             } else {
-                Toast.makeText(this, result.exceptionOrNull()?.message ?: "注册失败", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, result.exceptionOrNull()?.message ?: "Registration failed", Toast.LENGTH_SHORT).show()
             }
         }
     }

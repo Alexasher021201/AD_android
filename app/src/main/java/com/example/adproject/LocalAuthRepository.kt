@@ -30,7 +30,7 @@ object LocalAuthRepository {
         // 已存在同邮箱？
         for (i in 0 until users.length()) {
             if (users.getJSONObject(i).getString("email").equals(email, ignoreCase = true)) {
-                return Result.failure(IllegalStateException("该邮箱已注册"))
+                return Result.failure(IllegalStateException("Email already registered"))
             }
         }
         val id = (System.currentTimeMillis() / 1000).toInt()  // 简单生成个本地 id
@@ -54,7 +54,7 @@ object LocalAuthRepository {
                 return Result.success(UserInfo(u.getInt("id"), u.getString("name"), u.getString("email")))
             }
         }
-        return Result.failure(IllegalArgumentException("账号或密码不正确"))
+        return Result.failure(IllegalArgumentException("Incorrect email or password"))
     }
 
     data class UserInfo(val id: Int, val name: String, val email: String)

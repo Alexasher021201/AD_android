@@ -82,7 +82,7 @@
                 android:contentDescription="@null"
                 android:background="#F3F3F3" />
 
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/startBtn"
                 android:layout_width="match_parent"
                 android:layout_height="36dp"

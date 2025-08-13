@@ -83,7 +83,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/exerciseButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
             android:drawableTop="@drawable/exerciseicon"
             android:background="@drawable/button_background"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/dashboardButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
             android:drawableTop="@drawable/dashboardicon"
             android:background="@drawable/button_background"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/classButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
             android:drawableTop="@drawable/classicon"
             android:background="@drawable/button_background"/>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/homeButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
